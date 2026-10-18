@@ -1,1 +1,10 @@
+{
+  "name": "PAV.RENTAL Odoo",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [8069],
+  "postStartCommand": "docker compose up -d"
+}
 
