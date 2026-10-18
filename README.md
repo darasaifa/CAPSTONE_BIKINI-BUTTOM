@@ -11,6 +11,9 @@ Sistem informasi penyewaan motor PAV.RENTAL
 - `.devcontainer/` : konfigurasi Codespaces
 - `docker-compose.yml` : Odoo + PostgreSQL
 
+
+
 ## Alur kerja Git
+ATURAN WAJIB: Tidak boleh ada yang melakukan git push origin main secara langsung. Semua pengerjaan harus menggunakan Branch Perorangan masing-masing dan disatukan ke main melalui mekanisme Pull Request (PR).
 `feature/<nama>` → Pull Request → `staging` → Pull Request → `main`
 Jangan commit langsung ke `main` atau `staging`.
