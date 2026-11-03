@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Formulir kendaraan PAV.RENTAL -->
+    <record id="fleet_vehicle_view_form_inherit_pav" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.pav.rental</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Menyederhanakan formulir kendaraan -->
+            <xpath expr="//sheet" position="replace">
+                <sheet>
+                    <group string="Informasi Kendaraan">
+                        <field name="rental_image"
+                            string="Foto Kendaraan"
+                            widget="image"
+                            options="{'size': [300, 300]}"/>
+
+                        <field name="rental_vehicle_name" string="Nama Kendaraan"/>
+                        <field name="rental_vehicle_type"
+                            widget="radio"
+                            options="{'horizontal': true}"/>
+                        <field name="rental_brand_id" string="Merek Kendaraan"/>
+                        <field name="license_plate" string="Nomor Polisi"/>
+                        <field name="model_year" string="Tahun Kendaraan"/>
+                        <field name="color" string="Warna"/>
+                    </group>
+
+                    <group string="Informasi Penyewaan">
+                        <field name="rental_status"/>
+                        <field name="rental_notes"/>
+                    </group>
+                </sheet>
+            </xpath>
+
+            <!-- Menyembunyikan status bawaan Fleet -->
+            <xpath expr="//header/field[@name='state_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <!-- Daftar kendaraan PAV.RENTAL -->
+    <record id="fleet_vehicle_view_tree_inherit_pav" model="ir.ui.view">
+        <field name="name">fleet.vehicle.list.pav.rental</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//list" position="replace">
+                <list string="Data Armada">
+                    <field name="rental_vehicle_name" string="Nama Kendaraan"/>
+                    <field name="rental_vehicle_type" string="Tipe Kendaraan"/>
+                    <field name="rental_brand_id" string="Merek Kendaraan"/>
+                    <field name="license_plate" string="Nomor Polisi"/>
+                    <field name="model_year" string="Tahun"/>
+                    <field name="color" string="Warna"/>
+                    <field name="rental_status" widget="badge"/>
+                </list>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
