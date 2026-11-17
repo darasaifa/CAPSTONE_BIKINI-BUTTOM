@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--
+        Data dasar PAV.RENTAL yang harus sama di SEMUA lingkungan
+        (laptop anggota, staging, dan production).
+        Merek Honda sudah disediakan modul Fleet (fleet.brand_honda),
+        jadi di sini hanya ditambahkan merek yang belum ada.
+    -->
+    <data noupdate="1">
+        <record id="brand_yamaha" model="fleet.vehicle.model.brand">
+            <field name="name">Yamaha</field>
+        </record>
+    </data>
+</odoo>

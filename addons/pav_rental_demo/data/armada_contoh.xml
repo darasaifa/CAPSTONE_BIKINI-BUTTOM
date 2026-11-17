@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--
+        Armada contoh FIKTIF. Jenis motor mengikuti Bab I proposal,
+        tetapi nomor polisi dikarang (berakhiran CTH = contoh).
+        noupdate="1": perubahan yang kamu ketik di Odoo tidak ditimpa
+        saat modul di-upgrade; record baru di file ini tetap ikut masuk.
+    -->
+    <data noupdate="1">
+        <record id="motor_contoh_scoopy" model="fleet.vehicle">
+            <field name="rental_vehicle_name">Scoopy</field>
+            <field name="rental_brand_id" ref="fleet.brand_honda"/>
+            <field name="rental_vehicle_type">bike</field>
+            <field name="license_plate">KT 9001 CTH</field>
+            <field name="model_year">2023</field>
+            <field name="color">Merah</field>
+            <field name="rental_status">available</field>
+            <field name="rental_notes">Data contoh fiktif untuk pengembangan.</field>
+        </record>
+
+        <record id="motor_contoh_beat_2014" model="fleet.vehicle">
+            <field name="rental_vehicle_name">Beat</field>
+            <field name="rental_brand_id" ref="fleet.brand_honda"/>
+            <field name="rental_vehicle_type">bike</field>
+            <field name="license_plate">KT 9002 CTH</field>
+            <field name="model_year">2014</field>
+            <field name="color">Hitam</field>
+            <field name="rental_status">available</field>
+            <field name="rental_notes">Data contoh fiktif. Dipakai untuk skenario uji sewa minimal dua hari.</field>
+        </record>
+
+        <record id="motor_contoh_genio" model="fleet.vehicle">
+            <field name="rental_vehicle_name">Genio</field>
+            <field name="rental_brand_id" ref="fleet.brand_honda"/>
+            <field name="rental_vehicle_type">bike</field>
+            <field name="license_plate">KT 9003 CTH</field>
+            <field name="model_year">2024</field>
+            <field name="color">Putih</field>
+            <field name="rental_status">available</field>
+            <field name="rental_notes">Data contoh fiktif untuk pengembangan.</field>
+        </record>
+
+        <record id="motor_contoh_mio_gear" model="fleet.vehicle">
+            <field name="rental_vehicle_name">Mio Gear</field>
+            <field name="rental_brand_id" ref="pav_rental.brand_yamaha"/>
+            <field name="rental_vehicle_type">bike</field>
+            <field name="license_plate">KT 9004 CTH</field>
+            <field name="model_year">2022</field>
+            <field name="color">Biru</field>
+            <field name="rental_status">available</field>
+            <field name="rental_notes">Data contoh fiktif untuk pengembangan.</field>
+        </record>
+
+        <record id="motor_contoh_nmax" model="fleet.vehicle">
+            <field name="rental_vehicle_name">NMAX</field>
+            <field name="rental_brand_id" ref="pav_rental.brand_yamaha"/>
+            <field name="rental_vehicle_type">bike</field>
+            <field name="license_plate">KT 9005 CTH</field>
+            <field name="model_year">2024</field>
+            <field name="color">Abu-abu</field>
+            <field name="rental_status">available</field>
+            <field name="rental_notes">Data contoh fiktif. Motor premium.</field>
+        </record>
+
+        <record id="motor_contoh_aerox_servis" model="fleet.vehicle">
+            <field name="rental_vehicle_name">Aerox</field>
+            <field name="rental_brand_id" ref="pav_rental.brand_yamaha"/>
+            <field name="rental_vehicle_type">bike</field>
+            <field name="license_plate">KT 9006 CTH</field>
+            <field name="model_year">2023</field>
+            <field name="color">Hitam</field>
+            <field name="rental_status">service</field>
+            <field name="rental_notes">Data contoh fiktif. Sengaja berstatus Servis untuk skenario uji "unit tidak tersedia".</field>
+        </record>
+    </data>
+</odoo>

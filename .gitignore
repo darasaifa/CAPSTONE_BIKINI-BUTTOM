@@ -4,3 +4,12 @@ __pycache__/
 backup/
 *.dump
 *.log
+
+# Cadangan database dan filestore Odoo: berisi kata sandi dan data pribadi (UU PDP)
+*.sql
+*.backup
+*.zip
+filestore/
+
+# Salinan cadangan odoo.conf dari scripts/sambung-odoo-lokal.ps1
+*.conf.bak-*

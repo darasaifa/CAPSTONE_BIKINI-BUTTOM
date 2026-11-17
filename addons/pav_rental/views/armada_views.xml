@@ -6,6 +6,11 @@
         <field name="name">fleet.vehicle.form.pav.rental</field>
         <field name="model">fleet.vehicle</field>
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <!-- Prioritas tinggi: view ini mengganti seluruh <sheet>, jadi harus
+             diterapkan PALING AKHIR. Tanpa ini, modul lain yang menambah field
+             ke form Fleet (misalnya hr_fleet) gagal dipasang bila terpasang
+             sesudah PAV.RENTAL. -->
+        <field name="priority">99</field>
         <field name="arch" type="xml">
 
             <!-- Menyederhanakan formulir kendaraan -->
@@ -48,6 +53,8 @@
         <field name="name">fleet.vehicle.list.pav.rental</field>
         <field name="model">fleet.vehicle</field>
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree"/>
+        <!-- Sama seperti form: view ini mengganti seluruh <list>, jadi diterapkan paling akhir. -->
+        <field name="priority">99</field>
         <field name="arch" type="xml">
 
             <xpath expr="//list" position="replace">

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--
+        Pelanggan contoh FIKTIF. Nama dan nomor telepon dikarang,
+        bukan data pelanggan asli PAV.RENTAL (UU PDP).
+    -->
+    <data noupdate="1">
+        <record id="pelanggan_contoh_1" model="res.partner">
+            <field name="name">Pelanggan Contoh 1</field>
+            <field name="phone">+62 812-0000-0001</field>
+            <field name="city">Balikpapan</field>
+            <field name="country_id" ref="base.id"/>
+            <field name="comment">Data contoh fiktif untuk pengembangan.</field>
+        </record>
+
+        <record id="pelanggan_contoh_2" model="res.partner">
+            <field name="name">Pelanggan Contoh 2</field>
+            <field name="phone">+62 812-0000-0002</field>
+            <field name="city">Balikpapan</field>
+            <field name="country_id" ref="base.id"/>
+            <field name="comment">Data contoh fiktif untuk pengembangan.</field>
+        </record>
+
+        <record id="pelanggan_contoh_3" model="res.partner">
+            <field name="name">Pelanggan Contoh 3</field>
+            <field name="phone">+62 812-0000-0003</field>
+            <field name="city">Balikpapan</field>
+            <field name="country_id" ref="base.id"/>
+            <field name="comment">Data contoh fiktif untuk pengembangan.</field>
+        </record>
+    </data>
+</odoo>
