@@ -1,8 +1,5 @@
 # PAV.RENTAL (Odoo 19 Community)
 
-Sistem informasi penyewaan motor PAV.RENTAL.
-Capstone Design Project, S1 Sistem Informasi, Telkom University.
-
 ## Teknologi
 | Komponen | Versi |
 |---|---|
@@ -68,7 +65,7 @@ Data yang harus dimiliki semua anggota jangan hanya diketik di Odoo. Jadikan ber
 - data yang juga dipakai di production (misalnya merek, kategori, grup hak akses) → `addons/pav_rental/data/`
 - data contoh fiktif untuk mencoba dan demo → `addons/pav_rental_demo/data/`
 
-Database yang benar-benar satu untuk semua orang (termasuk dosen dan mitra) adalah **staging** di server dosen. Bagian ini sedang disiapkan EIM.
+Database yang benar-benar satu untuk semua orang adalah **staging** di server dosen. 
 
 ## Alur kerja Git
 ```
@@ -76,7 +73,7 @@ Database yang benar-benar satu untuk semua orang (termasuk dosen dan mitra) adal
 ```
 | Branch | Fungsi |
 |---|---|
-| `main` | Versi stabil, hanya diisi setelah demo disetujui. Dirilis oleh EIM. |
+| `main` | Versi stabil, hanya diisi setelah demo disetujui. |
 | `staging` | Gabungan hasil kerja yang sudah diperiksa, untuk uji dan demo. |
 | `<Nama>/<tugas>` | Tempat kerja harian. Satu tugas, satu branch. |
 
@@ -112,7 +109,6 @@ Menambah tes untuk fitur baru: buat berkas `tests/test_<fitur>.py` di modulnya, 
 ## Aturan tim
 - Jangan commit langsung ke `main` atau `staging`.
 - Pull Request hanya boleh di-merge kalau CI centang hijau dan sudah ditinjau satu anggota lain.
-- Perubahan pada `.github/`, `scripts/`, `Dockerfile`, `docker-compose.yml`, atau `config/` wajib diperiksa EIM.
 - Jangan commit kata sandi, berkas `.env`, `odoo.conf`, atau cadangan database.
 - Data contoh wajib fiktif. Jangan memasukkan data pelanggan asli mitra ke repo (UU PDP).
 - Kode final wajib masuk lewat repo (branch → Pull Request).
