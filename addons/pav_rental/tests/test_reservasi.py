@@ -101,7 +101,11 @@ class TestReservasi(TransactionCase):
 
     def test_tarif_lama_tidak_berubah_saat_tarif_motor_naik(self):
         baru = self._reservasi(self.genio, '2026-11-20', '2026-11-21')
+        # Simpan ke database seperti saat admin menekan Simpan di formulir.
+        self.env.flush_all()
         self.genio.rental_tarif_harian = 120000
+        self.env.flush_all()
+        self.env.invalidate_all()
         self.assertEqual(baru.total, 110000)
 
     # --- Alur status ---
