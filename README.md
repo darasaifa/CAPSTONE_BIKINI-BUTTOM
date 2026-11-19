@@ -1,8 +1,5 @@
 # PAV.RENTAL (Odoo 19 Community)
 
-Sistem informasi penyewaan motor PAV.RENTAL.
-Capstone Design Project, S1 Sistem Informasi, Telkom University.
-
 ## Teknologi
 | Komponen | Versi |
 |---|---|
@@ -13,11 +10,13 @@ Capstone Design Project, S1 Sistem Informasi, Telkom University.
 ## Struktur repo
 ```
 addons/pav_rental/                modul utama PAV.RENTAL
+addons/pav_rental/tests/          tes otomatis modul (dijalankan CI)
 addons/pav_rental_demo/           data contoh FIKTIF untuk laptop dan staging (bukan production)
 scripts/sambung-odoo-lokal.ps1    menyambungkan addons repo ke Odoo 19 di Windows
+.github/workflows/ci.yml          pemeriksaan otomatis setiap push dan Pull Request
 .gitignore                        berkas yang tidak boleh masuk Git
 ```
-Direncanakan (belum dibuat), untuk server staging dan production: `Dockerfile`, `docker-compose.yml`, `requirements.txt`, `config/odoo.conf`, `config/odoo.prod.conf`, pipeline CI/CD.
+Direncanakan (belum dibuat), untuk server staging dan production: `Dockerfile`, `docker-compose.yml`, `requirements.txt`, `config/odoo.conf`, `config/odoo.prod.conf`, deploy otomatis ke server (CD).
 
 Setiap modul harus berada tepat satu tingkat di bawah `addons/`, contoh: `addons/nama_modul/__manifest__.py`.
 
@@ -66,7 +65,7 @@ Data yang harus dimiliki semua anggota jangan hanya diketik di Odoo. Jadikan ber
 - data yang juga dipakai di production (misalnya merek, kategori, grup hak akses) → `addons/pav_rental/data/`
 - data contoh fiktif untuk mencoba dan demo → `addons/pav_rental_demo/data/`
 
-Database yang benar-benar satu untuk semua orang (termasuk dosen dan mitra) adalah **staging** di server dosen. Bagian ini sedang disiapkan EIM.
+Database yang benar-benar satu untuk semua orang adalah **staging** di server dosen. 
 
 ## Alur kerja Git
 ```
@@ -74,7 +73,7 @@ Database yang benar-benar satu untuk semua orang (termasuk dosen dan mitra) adal
 ```
 | Branch | Fungsi |
 |---|---|
-| `main` | Versi stabil, hanya diisi setelah demo disetujui. Dirilis oleh EIM. |
+| `main` | Versi stabil, hanya diisi setelah demo disetujui. |
 | `staging` | Gabungan hasil kerja yang sudah diperiksa, untuk uji dan demo. |
 | `<Nama>/<tugas>` | Tempat kerja harian. Satu tugas, satu branch. |
 
@@ -97,9 +96,19 @@ Lalu ajukan Pull Request ke `staging` dan minta satu anggota lain meninjaunya. H
 
 Catatan penamaan: jangan membuat branch yang hanya bernama `Nama` (misalnya `Dara`), karena bentrok dengan `Dara/tugas` dan ditolak Git.
 
+## Pemeriksaan otomatis (CI)
+Setiap kali kamu push atau membuat Pull Request ke `staging`/`main`, GitHub otomatis:
+1. menyalakan Odoo 19 dan PostgreSQL 16 versi Docker (sama dengan rencana server),
+2. memasang **PAV.RENTAL** dan **PAV.RENTAL - Data Contoh** ke database kosong,
+3. menjalankan semua tes di folder `tests/` modul tersebut.
+
+Hasilnya muncul di halaman Pull Request: **centang hijau** berarti lolos, **silang merah** berarti ada yang rusak. Klik **Details** untuk membaca log. Butuh sekitar 5–10 menit.
+
+Menambah tes untuk fitur baru: buat berkas `tests/test_<fitur>.py` di modulnya, lalu daftarkan di `tests/__init__.py`. Contohnya ada di `addons/pav_rental/tests/test_armada.py`.
+
 ## Aturan tim
 - Jangan commit langsung ke `main` atau `staging`.
-- Perubahan pada `scripts/`, `Dockerfile`, `docker-compose.yml`, atau `config/` wajib diperiksa EIM.
+- Pull Request hanya boleh di-merge kalau CI centang hijau dan sudah ditinjau satu anggota lain.
 - Jangan commit kata sandi, berkas `.env`, `odoo.conf`, atau cadangan database.
 - Data contoh wajib fiktif. Jangan memasukkan data pelanggan asli mitra ke repo (UU PDP).
 - Kode final wajib masuk lewat repo (branch → Pull Request).

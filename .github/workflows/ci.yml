@@ -1,0 +1,61 @@
+# Pemeriksaan otomatis (CI) PAV.RENTAL
+#
+# Setiap push dan setiap Pull Request ke staging/main, GitHub menyalakan
+# Odoo 19 + PostgreSQL 16 versi Docker (image yang sama dengan rencana server),
+# memasang modul pav_rental dan pav_rental_demo ke database kosong,
+# lalu menjalankan tes otomatis di folder tests/ kedua modul.
+#
+# Hasilnya terlihat sebagai tanda centang hijau (lolos) atau silang merah (gagal)
+# di halaman Pull Request. PR yang merah jangan di-merge.
+
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [staging, main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  odoo:
+    name: Pasang modul dan jalankan tes (Odoo 19)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Ambil kode dari repo
+        uses: actions/checkout@v4
+
+      # Database sekali pakai: dibuat di mesin GitHub lalu langsung dibuang
+      # setelah pemeriksaan selesai. Kata sandinya bukan kata sandi server mana pun.
+      - name: Nyalakan PostgreSQL 16
+        run: |
+          docker network create ci
+          docker run -d --name db --network ci \
+            -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres \
+            postgres:16
+
+      - name: Pasang PAV.RENTAL di Odoo 19 dan jalankan tes
+        run: |
+          set -o pipefail
+          docker run --rm --network ci \
+            -e HOST=db -e USER=odoo -e PASSWORD=odoo \
+            -v "$GITHUB_WORKSPACE/addons:/mnt/extra-addons:ro" \
+            odoo:19.0 \
+            odoo -d ci_pavrental \
+              -i pav_rental,pav_rental_demo \
+              --test-tags /pav_rental,/pav_rental_demo \
+              --stop-after-init \
+            2>&1 | tee odoo.log
+
+      - name: Periksa log Odoo
+        run: |
+          if grep -E " (ERROR|CRITICAL) " odoo.log; then
+            echo "::error::Ada ERROR di log Odoo. Baca baris di atas untuk tahu file dan penyebabnya."
+            exit 1
+          fi
+          echo "Modul terpasang tanpa error dan semua tes lolos."
