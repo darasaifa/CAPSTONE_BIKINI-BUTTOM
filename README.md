@@ -92,7 +92,7 @@ git add -A
 git commit -m "Pesan singkat tentang perubahan"
 git push -u origin Nama/nama-tugas
 ```
-Lalu ajukan Pull Request ke `staging` dan minta satu anggota lain meninjaunya. Hapus branch setelah di-merge, lalu buat branch baru untuk tugas berikutnya.
+Lalu ajukan Pull Request ke `staging`, tunggu CI centang hijau, lalu merge. Hapus branch setelah di-merge, lalu buat branch baru untuk tugas berikutnya.
 
 Catatan penamaan: jangan membuat branch yang hanya bernama `Nama` (misalnya `Dara`), karena bentrok dengan `Dara/tugas` dan ditolak Git.
 
@@ -108,7 +108,7 @@ Menambah tes untuk fitur baru: buat berkas `tests/test_<fitur>.py` di modulnya, 
 
 ## Aturan tim
 - Jangan commit langsung ke `main` atau `staging`.
-- Pull Request hanya boleh di-merge kalau CI centang hijau dan sudah ditinjau satu anggota lain.
+- Pull Request hanya bisa di-merge kalau CI centang hijau. Setiap anggota boleh me-merge PR-nya sendiri; minta teman melihat dulu kalau perubahannya besar.
 - Jangan commit kata sandi, berkas `.env`, `odoo.conf`, atau cadangan database.
 - Data contoh wajib fiktif. Jangan memasukkan data pelanggan asli mitra ke repo (UU PDP).
 - Kode final wajib masuk lewat repo (branch → Pull Request).
