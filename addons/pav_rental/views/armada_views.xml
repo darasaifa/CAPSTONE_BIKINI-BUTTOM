@@ -36,6 +36,13 @@
                         <field name="rental_status"/>
                         <field name="rental_notes"/>
                     </group>
+
+                    <group string="Tarif Sewa">
+                        <field name="rental_currency_id" invisible="1"/>
+                        <field name="rental_tarif_harian"/>
+                        <field name="rental_tarif_mingguan"/>
+                        <field name="rental_minimal_hari"/>
+                    </group>
                 </sheet>
             </xpath>
 

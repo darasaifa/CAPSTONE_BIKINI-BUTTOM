@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--
+        Tarif CONTOH untuk motor fiktif di armada_contoh.xml.
+        Kisaran Rp85.000 s.d. Rp150.000 per hari mengikuti Bab I proposal;
+        tarif mingguan sementara 6 x tarif harian sampai daftar harga mitra masuk.
+        noupdate="0" supaya tarif ini juga masuk ke database yang sudah memasang
+        Data Contoh sebelumnya (cukup Upgrade modul).
+    -->
+    <data noupdate="0">
+        <record id="motor_contoh_scoopy" model="fleet.vehicle">
+            <field name="rental_tarif_harian">110000</field>
+            <field name="rental_tarif_mingguan">660000</field>
+        </record>
+        <record id="motor_contoh_beat_2014" model="fleet.vehicle">
+            <field name="rental_tarif_harian">85000</field>
+            <field name="rental_tarif_mingguan">510000</field>
+            <field name="rental_minimal_hari">2</field>
+        </record>
+        <record id="motor_contoh_genio" model="fleet.vehicle">
+            <field name="rental_tarif_harian">110000</field>
+            <field name="rental_tarif_mingguan">660000</field>
+        </record>
+        <record id="motor_contoh_mio_gear" model="fleet.vehicle">
+            <field name="rental_tarif_harian">100000</field>
+            <field name="rental_tarif_mingguan">600000</field>
+        </record>
+        <record id="motor_contoh_nmax" model="fleet.vehicle">
+            <field name="rental_tarif_harian">150000</field>
+            <field name="rental_tarif_mingguan">900000</field>
+        </record>
+        <record id="motor_contoh_aerox_servis" model="fleet.vehicle">
+            <field name="rental_tarif_harian">150000</field>
+            <field name="rental_tarif_mingguan">900000</field>
+        </record>
+    </data>
+</odoo>

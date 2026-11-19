@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="pav_rental_armada_action" model="ir.actions.act_window">
+        <field name="name">Armada</field>
+        <field name="res_model">fleet.vehicle</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="pav_rental_pelanggan_action" model="ir.actions.act_window">
+        <field name="name">Pelanggan</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu aplikasi PAV.RENTAL -->
+    <menuitem id="menu_pav_rental_root" name="PAV.RENTAL" sequence="5"/>
+
+    <menuitem id="menu_pav_rental_reservasi" name="Reservasi" parent="menu_pav_rental_root"
+              action="pav_rental_reservasi_action" sequence="10"/>
+    <menuitem id="menu_pav_rental_armada" name="Armada" parent="menu_pav_rental_root"
+              action="pav_rental_armada_action" sequence="20"/>
+    <menuitem id="menu_pav_rental_pelanggan" name="Pelanggan" parent="menu_pav_rental_root"
+              action="pav_rental_pelanggan_action" sequence="30"/>
+
+</odoo>

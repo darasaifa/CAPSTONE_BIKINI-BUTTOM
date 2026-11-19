@@ -10,13 +10,15 @@ Semua nama, nomor polisi, dan nomor telepon di modul ini dikarang
 sesuai prinsip pembatasan data pada UU PDP.
 Modul ini TIDAK boleh dipasang di production.
 """,
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.1.0",
     "category": "Services",
     "author": "Kelompok Bikini Bottom - Telkom University",
     "depends": ["pav_rental"],
     "data": [
         "data/armada_contoh.xml",
+        "data/tarif_contoh.xml",
         "data/pelanggan_contoh.xml",
+        "data/reservasi_contoh.xml",
     ],
     "application": False,
     "installable": True,

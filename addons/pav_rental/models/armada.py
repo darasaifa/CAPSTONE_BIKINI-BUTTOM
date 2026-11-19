@@ -47,6 +47,28 @@ class FleetVehicle(models.Model):
         help='Catatan tambahan mengenai kendaraan untuk keperluan penyewaan.',
     )
 
+    rental_currency_id = fields.Many2one(
+        comodel_name='res.currency',
+        related='company_id.currency_id',
+        string='Mata Uang Sewa',
+    )
+
+    rental_tarif_harian = fields.Monetary(
+        string='Tarif Harian',
+        currency_field='rental_currency_id',
+    )
+
+    rental_tarif_mingguan = fields.Monetary(
+        string='Tarif Mingguan',
+        currency_field='rental_currency_id',
+    )
+
+    rental_minimal_hari = fields.Integer(
+        string='Minimal Sewa (hari)',
+        default=1,
+        help='Contoh: Beat 2014 minimal disewa 2 hari.',
+    )
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:

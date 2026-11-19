@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Nomor reservasi otomatis: RSV/2026/0001, RSV/2026/0002, ... -->
+    <data noupdate="1">
+        <record id="seq_pav_rental_reservasi" model="ir.sequence">
+            <field name="name">Reservasi PAV.RENTAL</field>
+            <field name="code">pav.rental.reservasi</field>
+            <field name="prefix">RSV/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

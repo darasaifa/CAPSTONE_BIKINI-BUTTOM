@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--
+        Reservasi contoh FIKTIF untuk demo. Jadwalnya sengaja dipilih supaya
+        skenario uji bisa dicoba di Odoo, misalnya memesan NMAX 22-24 Nov
+        (harus ditolak karena bentrok dengan reservasi_contoh_nmax).
+    -->
+    <data noupdate="1">
+        <record id="reservasi_contoh_nmax" model="pav.rental.reservasi">
+            <field name="partner_id" ref="pelanggan_contoh_2"/>
+            <field name="vehicle_id" ref="motor_contoh_nmax"/>
+            <field name="tanggal_mulai">2026-11-21</field>
+            <field name="tanggal_selesai">2026-11-23</field>
+            <field name="paket">harian</field>
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="reservasi_contoh_genio" model="pav.rental.reservasi">
+            <field name="partner_id" ref="pelanggan_contoh_3"/>
+            <field name="vehicle_id" ref="motor_contoh_genio"/>
+            <field name="tanggal_mulai">2026-11-24</field>
+            <field name="tanggal_selesai">2026-12-01</field>
+            <field name="paket">mingguan</field>
+            <field name="antar_jemput" eval="True"/>
+            <field name="biaya_antar">25000</field>
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="reservasi_contoh_mio" model="pav.rental.reservasi">
+            <field name="partner_id" ref="pelanggan_contoh_1"/>
+            <field name="vehicle_id" ref="motor_contoh_mio_gear"/>
+            <field name="tanggal_mulai">2026-11-14</field>
+            <field name="tanggal_selesai">2026-11-15</field>
+            <field name="paket">harian</field>
+            <field name="state">done</field>
+        </record>
+    </data>
+</odoo>
