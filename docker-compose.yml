@@ -24,6 +24,26 @@ services:
       - ./addons:/mnt/extra-addons
     restart: unless-stopped
 
+  # Alat backup dan restore. Tidak ikut menyala saat "docker compose up".
+  # Cara pakai ada di README bagian Backup dan restore.
+  backup:
+    image: postgres:16
+    profiles: ["alat"]
+    depends_on:
+      - db
+    environment:
+      PGHOST: db
+      PGUSER: odoo
+      PGPASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME:-pavrental}
+      SIMPAN_HARI: ${SIMPAN_HARI:-14}
+      TZ: Asia/Makassar
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - ./backups:/backups
+      - ./scripts:/scripts:ro
+    entrypoint: ["bash"]
+
 volumes:
   db-data:
   odoo-data:

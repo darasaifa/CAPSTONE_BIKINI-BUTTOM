@@ -1,0 +1,2 @@
+# Skrip shell harus tetap berakhiran baris gaya Linux supaya bisa jalan di Docker.
+*.sh text eol=lf
