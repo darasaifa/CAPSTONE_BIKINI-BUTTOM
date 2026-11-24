@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [staging, main]
+  push:
+    branches: [staging, main]
+
+jobs:
+  tes-odoo:
+    name: Tes modul Odoo
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Ambil kode
+        uses: actions/checkout@v4
+
+      - name: Cari modul di folder addons
+        id: modul
+        run: |
+          DAFTAR=$(find addons -mindepth 2 -maxdepth 2 -name __manifest__.py -printf '%h\n' | xargs -r -n1 basename | sort | paste -sd, -)
+          echo "daftar=$DAFTAR" >> "$GITHUB_OUTPUT"
+          if [ -z "$DAFTAR" ]; then
+            echo "Belum ada modul di folder addons, tes dilewati."
+          else
+            echo "Modul yang dites: $DAFTAR"
+          fi
+
+      - name: Jalankan tes Odoo
+        if: steps.modul.outputs.daftar != ''
+        run: |
+          cp .env.example .env
+          TAGS=$(echo "${{ steps.modul.outputs.daftar }}" | sed 's/[^,]*/\/&/g')
+          docker compose run --rm -T odoo odoo -d test_ci \
+            -i "${{ steps.modul.outputs.daftar }}" \
+            --test-enable --test-tags "$TAGS" \
+            --stop-after-init --log-level=test
+            
