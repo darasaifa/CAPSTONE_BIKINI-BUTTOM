@@ -40,6 +40,27 @@ docker compose start odoo
 
 Folder `backups` gak ikut ke GitHub karena isinya data asli.
 
+## Production
+
+Ini buat di server, bukan di laptop. Bedanya: halaman pengelola database ditutup, port gak dibuka ke luar (akses lewat Cloudflare Tunnel), dan Odoo jalan pakai beberapa proses.
+
+Siapin dulu dua file rahasia, dua-duanya gak ikut ke GitHub:
+
+```
+cp .env.example .env
+cp config/odoo.conf.example config/odoo.conf
+```
+
+Isi `.env` pakai password database yang kuat plus token Cloudflare, terus ganti `admin_passwd` di `config/odoo.conf`.
+
+Data awal diambil dari file backup, taruh di folder `backups`:
+
+```
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d db
+docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm backup /scripts/restore.sh nama_file_backup.tar.gz
+docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile tunnel up -d
+```
+
 ## Alur kerja
 
 Jangan push langsung ke `main` atau `staging`. Bikin branch dari `staging` dulu:
