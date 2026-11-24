@@ -48,7 +48,13 @@ if [ -f "$KERJA/filestore.tar.gz" ]; then
   tar -C "$KERJA/fs" -xzf "$KERJA/filestore.tar.gz"
   rm -rf "/var/lib/odoo/filestore/$TUJUAN"
   mv "$KERJA/fs/$ASAL" "/var/lib/odoo/filestore/$TUJUAN"
-  chown -R "$(stat -c '%u:%g' /var/lib/odoo)" "/var/lib/odoo/filestore/$TUJUAN"
 fi
+
+# Folder data harus milik pengguna Odoo (100:101 di image resmi Odoo).
+# Penting di server baru, saat restore dijalankan sebelum Odoo pernah menyala.
+PEMILIK="${ODOO_UID:-100}:${ODOO_GID:-101}"
+mkdir -p /var/lib/odoo/filestore
+chown "$PEMILIK" /var/lib/odoo /var/lib/odoo/filestore
+[ -d "/var/lib/odoo/filestore/$TUJUAN" ] && chown -R "$PEMILIK" "/var/lib/odoo/filestore/$TUJUAN"
 
 echo "Selesai dalam $(( $(date +%s) - MULAI )) detik. Database: $TUJUAN"

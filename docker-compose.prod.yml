@@ -1,0 +1,35 @@
+# Tambahan pengaturan untuk production. Selalu dipakai bersama docker-compose.yml:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# Sebelumnya siapkan .env dan config/odoo.conf (lihat README bagian Production).
+
+x-log: &log
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+services:
+  db:
+    restart: always
+    logging: *log
+
+  odoo:
+    restart: always
+    # Port tidak dibuka ke luar. Akses publik hanya lewat Cloudflare Tunnel.
+    ports: !reset []
+    volumes:
+      - ./config/odoo.conf:/etc/odoo/odoo.conf:ro
+    logging: *log
+
+  # Cloudflare Tunnel: menyalurkan https://domain-kalian ke Odoo tanpa membuka port.
+  # Dinyalakan dengan --profile tunnel setelah token tersedia di .env.
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    profiles: ["tunnel"]
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
+    depends_on:
+      - odoo
+    restart: always
+    logging: *log

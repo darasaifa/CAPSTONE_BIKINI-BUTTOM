@@ -1,0 +1,32 @@
+; Pengaturan Odoo untuk production.
+; Salin jadi config/odoo.conf di server, lalu ganti admin_passwd.
+; File config/odoo.conf tidak ikut ke GitHub.
+
+[options]
+addons_path = /mnt/extra-addons
+data_dir = /var/lib/odoo
+
+; Master password untuk backup, restore, dan hapus database lewat Odoo.
+; Wajib diganti dengan password panjang yang hanya diketahui pemilik dan tim.
+admin_passwd = GANTI_DENGAN_MASTER_PASSWORD_YANG_KUAT
+
+; Kunci ke satu database dan tutup halaman pengelola database.
+db_name = pavrental
+dbfilter = ^pavrental$
+list_db = False
+
+; Odoo berada di balik Cloudflare Tunnel yang memakai HTTPS.
+proxy_mode = True
+
+; Beberapa proses sekaligus supaya admin dan keuangan bisa bekerja bersamaan.
+workers = 2
+max_cron_threads = 1
+gevent_port = 8072
+
+; Batas supaya satu proses yang macet tidak membuat server hang.
+limit_memory_soft = 671088640
+limit_memory_hard = 1073741824
+limit_time_cpu = 120
+limit_time_real = 240
+
+log_level = info
